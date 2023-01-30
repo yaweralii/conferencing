@@ -1,4 +1,4 @@
-import { speakerJson } from "../page";
+import speakerJson from "../page";
 import styles from "../../conference.module.css";
 
 interface params {
@@ -24,7 +24,8 @@ function fetchSpeakerInfo(params: params) {
 
 export default async function Page(params: params) {
   const speakerInfo = fetchSpeakerInfo(params);
-  console.log(params, "=====");
+  console.log(params, "slugName");
+  console.log(speakerJson, "slugData");
 
   const { name, bio, sessions }: SpeakerData = speakerInfo;
 

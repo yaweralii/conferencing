@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../conference.module.css";
 interface SessionData {
   id: string;
@@ -43,7 +44,13 @@ export default async function Page() {
           speakers,
         }: SessionData) => (
           <div key={id} className={styles.infoContainer}>
-            <h3 className={styles.titleText}>{title}</h3>
+            <Link
+              className={styles.bgLinks}
+              href={`/conference/sessions/${id}`}
+            >
+              <h3 className={styles.titleText}>{title}</h3>
+            </Link>
+
             {speakers &&
               speakers.map(({ name }: SpeakerData) => (
                 <h3 className={styles.titleText} key={id}>

@@ -1,4 +1,3 @@
-// "use client";
 import Link from "next/link";
 import styles from "../conference.module.css";
 
@@ -24,22 +23,25 @@ export default async function Page() {
         Last Rendered: {new Date().toLocaleTimeString()}
       </div>
       <h1>Welcome to Globomantics Speakers</h1>
-      {data.speakers.map(({ id, name, bio }: SpeakerData) => (
-        <div key={id} className={styles.infoContainer}>
-          <Link
-            className={styles.bgLinks}
-            href={`/conference/speakers/${name}`}
-            // href={{
-            //   pathname: `/conference/speakers/${name}`,
-            //   query: { slug: id },
-            // }}
-          >
-            <h3 className={styles.titleText}>{name}</h3>
-          </Link>
+      {data.speakers.map(({ id, name, bio }: SpeakerData) => {
+        const slugName = name.replace(" ", "-");
+        return (
+          <div key={id} className={styles.infoContainer}>
+            <Link
+              className={styles.bgLinks}
+              href={`/conference/speakers/${slugName}`}
+              // href={{
+              //   pathname: `/conference/speakers/${name}`,
+              //   query: { slug: id },
+              // }}
+            >
+              <h3 className={styles.titleText}>{name}</h3>
+            </Link>
 
-          <h5 className={styles.descText}>{bio}</h5>
-        </div>
-      ))}
+            <h5 className={styles.descText}>{bio}</h5>
+          </div>
+        );
+      })}
     </div>
   );
 }

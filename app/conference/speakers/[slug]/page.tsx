@@ -1,5 +1,6 @@
-import speakerJson from "../page";
+// import { speakerJson } from "../page";
 import styles from "../../conference.module.css";
+// import { useRouter } from "next/router";
 
 interface params {
   slug: string;
@@ -14,31 +15,52 @@ interface SessionData {
   id: string;
 }
 
-function fetchSpeakerInfo(params: params) {
-  // API call, DB Query, fetch from the app
-  const speakerInfo = speakerJson.speakers.find(
-    (speaker: any) => speaker.name == params.slug
+async function fetchSpeakers() {
+  const response = await fetch(
+    "https://raw.githubusercontent.com/adhithiravi/Consuming-GraphqL-Apollo/master/api/data/speakers.json"
   );
+  const speakerJson = await response.json();
+  return speakerJson;
+}
+
+function fetchSpeakerInfo(slug: any, speakerJson: any) {
+  console.log(speakerJson.speakers[0].name, "???");
+  console.log(slug, "+++");
+  const speakerInfo = speakerJson?.speakers?.filter(
+    (speaker: any) => speaker.name == slug
+  );
+  console.log(speakerInfo, "--");
   return speakerInfo;
 }
 
-export default async function Page(params: params) {
-  const speakerInfo = fetchSpeakerInfo(params);
-  console.log(params, "slugName");
-  console.log(speakerJson, "slugData");
+export default async function Page({ params }: any) {
+  const speakerJson = await fetchSpeakers();
+  console.log(speakerJson, "=");
+  console.log(params, "###");
 
-  const { name, bio, sessions }: SpeakerData = speakerInfo;
+  const slug = params.slug;
+  console.log(slug, "slugName");
+  const speakerInfo = fetchSpeakerInfo(slug, speakerJson);
+  console.log(speakerInfo, "%%%");
+  // const data = { params };
+  // console.log(data, "slugData");
+  // const router = useRouter();
+  // console.log(router, "====");
+  // console.log(router.query, "query");
+
+  // const { name, bio, sessions }: SpeakerData = speakerInfo;
 
   return (
-    <div className={styles.infoContainer}>
-      <h3 className={styles.titleText}>{name}</h3>
-      <h5 className={styles.descText}>About: {bio}</h5>
-      {sessions &&
-        sessions.map(({ name, id }: SessionData) => (
-          <div key={id}>
-            <h5 className={styles.descText}>Session: {name}</h5>
-          </div>
-        ))}
-    </div>
+    // <div className={styles.infoContainer}>
+    //   <h3 className={styles.titleText}>{name}</h3>
+    //   <h5 className={styles.descText}>About: {bio}</h5>
+    //   {sessions &&
+    //     sessions.map(({ name, id }: SessionData) => (
+    //       <div key={id}>
+    //         <h5 className={styles.descText}>Session: {name}</h5>
+    //       </div>
+    //     ))}
+    // </div>
+    <h1>{params.slug}</h1>
   );
 }

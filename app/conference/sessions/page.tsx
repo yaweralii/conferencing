@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "@/app/conference/conference.module.css";
-import { SessionData, SpeakerData } from "@/app/interfaces/page";
+import { SessionData, SpeakerData } from "@/app/interfaces";
 
 async function fetchSessions() {
   const response = await fetch(

@@ -1,5 +1,5 @@
 import styles from "@/app/conference/conference.module.css";
-import { SpData, SeData } from "@/app/interfaces/page";
+import { SpData, SeData } from "@/app/interfaces";
 
 async function fetchSpeakers() {
   const response = await fetch(

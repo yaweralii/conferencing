@@ -1,5 +1,5 @@
 import styles from "@/app/conference/conference.module.css";
-import { SpeakerData, SessionDataTypes } from "@/app/interfaces/page";
+import { SpeakerData, SessionDataTypes } from "@/app/interfaces";
 
 async function fetchSessions() {
   const response = await fetch(

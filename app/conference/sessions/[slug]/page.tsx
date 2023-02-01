@@ -1,27 +1,10 @@
-import styles from "../../conference.module.css";
-interface speakerData {
-  id: number;
-  name: string;
-}
-interface SessionDataTypes {
-  id: number;
-  title: string;
-  description: string;
-  startsAt: string;
-  endsAt: string;
-  room: string;
-  day: string;
-  format: string;
-  track: string;
-  level: string;
-  speakers: [];
-}
+import styles from "@/app/conference/conference.module.css";
+import { SpeakerData, SessionDataTypes } from "@/app/interfaces/page";
 
 async function fetchSessions() {
   const response = await fetch(
     "https://raw.githubusercontent.com/adhithiravi/Consuming-GraphqL-Apollo/master/api/data/sessions.json"
   );
-
   const sessionData = await response.json();
   return sessionData;
 }
@@ -63,7 +46,7 @@ export default async function Page({ params }: any) {
       <h5 className={styles.descText}>Lan: {track}</h5>
       <h5 className={styles.descText}>Level: {level}</h5>
       {speakers &&
-        speakers.map(({ name, id }: speakerData) => (
+        speakers.map(({ name, id }: SpeakerData) => (
           <div key={id}>
             <h5 className={styles.descText}>Speaker: {name}</h5>
           </div>

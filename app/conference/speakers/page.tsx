@@ -1,12 +1,12 @@
 import Link from "next/link";
-import styles from "../conference.module.css";
+import styles from "@/app/conference/conference.module.css";
 
 interface SpeakerData {
   name: string;
   bio: string;
   id: string;
 }
-// Static data fetching
+
 async function fetchSpeakers() {
   const response = await fetch(
     "https://raw.githubusercontent.com/adhithiravi/Consuming-GraphqL-Apollo/master/api/data/speakers.json"
@@ -30,10 +30,6 @@ export default async function Page() {
             <Link
               className={styles.bgLinks}
               href={`/conference/speakers/${slugName}`}
-              // href={{
-              //   pathname: `/conference/speakers/${name}`,
-              //   query: { slug: id },
-              // }}
             >
               <h3 className={styles.titleText}>{name}</h3>
             </Link>

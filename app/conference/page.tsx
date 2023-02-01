@@ -1,8 +1,8 @@
 import { Inter } from "@next/font/google";
 import Link from "next/link";
 import Image from "next/image";
-import ConfImg from ".././images/con1.jpg";
-import styles from "./conference.module.css";
+import ConfImg from "@/app/images/con1.jpg";
+import styles from "@/app/conference/conference.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

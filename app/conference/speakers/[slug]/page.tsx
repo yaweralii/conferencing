@@ -1,14 +1,5 @@
-import styles from "../../conference.module.css";
-
-interface SpeakerData {
-  name: string;
-  bio: string;
-  sessions: [];
-}
-interface SessionData {
-  name: string;
-  id: string;
-}
+import styles from "@/app/conference/conference.module.css";
+import { SpData, SeData } from "@/app/interfaces/page";
 
 async function fetchSpeakers() {
   const response = await fetch(
@@ -20,7 +11,7 @@ async function fetchSpeakers() {
 
 function fetchSpeakerInfo(slug: string, speakerData: any) {
   const speakerInfo = speakerData?.speakers?.find(
-    (speaker: SpeakerData) => speaker.name == slug
+    (speaker: SpData) => speaker.name == slug
   );
   return speakerInfo;
 }
@@ -30,14 +21,14 @@ export default async function Page({ params }: any) {
   const slug = params.slug.replace("-", " ");
   const speakerInfo = fetchSpeakerInfo(slug, speakerData);
 
-  const { name, bio, sessions }: SpeakerData = speakerInfo;
+  const { name, bio, sessions }: SpData = speakerInfo;
 
   return (
     <div className={styles.infoContainer}>
       <h3 className={styles.titleText}>{name}</h3>
       <h5 className={styles.descText}>About: {bio}</h5>
       {sessions &&
-        sessions.map(({ name, id }: SessionData) => (
+        sessions.map(({ name, id }: SeData) => (
           <div key={id}>
             <h5 className={styles.descText}>Session: {name}</h5>
           </div>

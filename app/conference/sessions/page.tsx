@@ -1,19 +1,7 @@
 import Link from "next/link";
-import styles from "../conference.module.css";
-interface SessionData {
-  id: string;
-  title: string;
-  description: string;
-  room: string;
-  day: string;
-  track: string;
-  speakers: [];
-}
-interface SpeakerData {
-  name: string;
-}
+import styles from "@/app/conference/conference.module.css";
+import { SessionData, SpeakerData } from "@/app/interfaces/page";
 
-// Dynamic Data Fetching or Server Side Rendering
 async function fetchSessions() {
   const response = await fetch(
     "https://raw.githubusercontent.com/adhithiravi/Consuming-GraphqL-Apollo/master/api/data/sessions.json",
@@ -52,7 +40,7 @@ export default async function Page() {
             </Link>
 
             {speakers &&
-              speakers.map(({ name }: SpeakerData) => (
+              speakers.map(({ name, id }: SpeakerData) => (
                 <h3 className={styles.titleText} key={id}>
                   Speaker: {name}
                 </h3>

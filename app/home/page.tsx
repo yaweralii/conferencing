@@ -1,9 +1,6 @@
-import { Inter } from "@next/font/google";
 import Image from "next/image";
-import StoryImg from ".././images/home1.jpg";
-import styles from "./home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import StoryImg from "@/app/images/home1.jpg";
+import styles from "@/app/home/home.module.css";
 
 export default function Page() {
   return (
